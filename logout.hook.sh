@@ -46,5 +46,7 @@ cd /
 # the user directory has been cleaned.
 /bin/rm -rf $userHomeDir
 
+/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister -kill -r -domain local -domain system -domain user
+
 echo "$USER logged out at $(date) on $(hostname)" >> $activityLogFile
 echo %100
