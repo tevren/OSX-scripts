@@ -51,23 +51,12 @@ fi
 /usr/sbin/chown -R ${USER}:${labGroup} $userHomeDir
 /bin/chmod 775 $userHomeDir
 
-# stops users from changing background
-/usr/sbin/chown root:wheel $userHomeDir/Library/Safari/Safari\ Desktop\ Picture.jpg
-/bin/chmod 744 $userHomeDir/Library/Preferences/Safari/Safari\ Desktop\ Picture.jpg
-
 if [ -e "$templateKeychain".orig ]
 then
     /bin/mv -f $templateKeychain.orig $templateKeychain
 fi
 
-#the finder plist has to be owned by root so that the current user may not change it
-/usr/sbin/chown root:wheel $userHomeDir/Library/Preferences/com.apple.finder.plist
-/bin/chmod 755 $userHomeDir/Library/Preferences/com.apple.finder.plist
-
-#fix permissions for adobe media encoder
-/usr/sbin/chown -R root:staff $userHomeDir/Library/Preferences/Adobe/Adobe*Media*Encoder/
-
-
+/usr/bin/plutil -lint -s $userHomeDir/Library/Preferences/com.apple.dock.plist
 echo "$USER logged in at $(date) on $(hostname)" >> $activityLogFile
 
 exit 0
